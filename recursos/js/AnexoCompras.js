@@ -182,7 +182,7 @@ $(document).ready(function () {
 let parts = inputDate.split('-');
 // Reorganizamos los valores en el formato dd/mm/yyyy
 let formattedDate = `${parts[2]}/${parts[1]}/${parts[0]}`;
-return = formattedDate;
+return formattedDate;
  }
 
     
