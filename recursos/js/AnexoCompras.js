@@ -81,7 +81,7 @@ $(document).ready(function () {
                 if (dteif == "03" || dteif == "05" || dteif == "06"|| dteif == "11") {
 
                     let obj = {
-                        "FECHA_EMISIÓN": objson.identificacion.fecEmi,
+                        "FECHA_EMISIÓN": GetDateFormat(objson.identificacion.fecEmi),
                         "CLASE_DOCUMENTO": "4. DOCUMENTO TRIBUTARIO ELECTRONICO (DTE)",
                         // "DTE": objson.identificacion.tipoDte,
                         "TIPO_DOCUMENTO": GetDTE_Anexo_Compras(objson.identificacion.tipoDte),
@@ -176,8 +176,16 @@ $(document).ready(function () {
                 return 'CÓDIGO DTE NO IDENTIFICADO';
         }
     }
+// Suponiendo que tienes la fecha en formato yyyy-mm-dd
+ function GetDateFormat(inputDate){
+// Usamos split para separar año, mes y día
+let parts = inputDate.split('-');
+// Reorganizamos los valores en el formato dd/mm/yyyy
+let formattedDate = `${parts[2]}/${parts[1]}/${parts[0]}`;
+return = formattedDate;
+ }
 
-
+    
     function GetDTE_Anexo_Compras(codigoDTE) {
         switch (codigoDTE) {
             case '03':
