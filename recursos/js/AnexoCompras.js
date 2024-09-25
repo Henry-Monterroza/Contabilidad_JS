@@ -96,7 +96,8 @@ $(document).ready(function () {
                         "IMPORTACIONES_GRAVADAS_DE_BIENES": "0.00",
                         "IMPORTACIONES_GRAVADAS_DE_SERVICIOS": "0.00",
                         "CRÉDITO_FISCAL":(objson.resumen?.tributos?.find(tributo => tributo.codigo === "20") || {}).valor || "0",
-                        "TOTAL_DE_COMPRAS":objson.resumen.montoTotalOperacion
+                        "TOTAL_DE_COMPRAS":objson.resumen.montoTotalOperacion,
+                        "DUI_DEL_PROVEEDOR ":""
                     };
                     excelarray.push(obj);
                 }
