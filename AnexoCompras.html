@@ -65,21 +65,22 @@
         <div class="row mt-2">
             <div class="col-md-12">
                 <ul>
-                    <li><strong>Fecha de Emisión:</strong> Extraído del campo <code>fecEmi</code> en el objeto <code>identificacion</code> del JSON.</li>
+                    <li><strong>Fecha de Emisión:</strong> Obtenido del campo <code>fecEmi</code> en el objeto <code>identificacion</code>, formateado con <code>GetDateFormat</code>.</li>
                     <li><strong>Clase de Documento:</strong> Valor fijo asignado como <code>"4. DOCUMENTO TRIBUTARIO ELECTRONICO (DTE)"</code>.</li>
-                    <li><strong>Tipo de Documento:</strong> Generado por la función <code>GetDTE_Anexo_Compras()</code>, que recibe el valor del campo <code>tipoDte</code> en el objeto <code>identificacion</code> del JSON.</li>
-                    <li><strong>Número de Documento:</strong> Extraído del campo <code>codigoGeneracion</code> en el objeto <code>identificacion</code> del JSON.</li>
-                    <li><strong>NIT o NRC del Cliente:</strong> Extraído del campo <code>nit</code> en el objeto <code>receptor</code>, o del campo <code>nrc</code> en el objeto <code>emisor</code> del JSON, dependiendo de cuál esté presente.</li>
-                    <li><strong>Nombre/Razón Social o Denominación:</strong> Extraído del campo <code>nombre</code> o <code>nombreComercial</code> en el objeto <code>emisor</code> del JSON, dependiendo de cuál esté presente.</li>
-                    <li><strong>Compras Internas Exentas:</strong> Extraído del campo <code>totalExenta</code> en el objeto <code>resumen</code> del JSON.</li>
-                    <li><strong>Internaciones Exentas y/o No Sujetas:</strong> Valor fijo asignado como <code>"0.00"</code>, dado que no existe en el JSON.</li>
-                    <li><strong>Importaciones Exentas y/o No Sujetas:</strong> Valor fijo asignado como <code>"0.00"</code>, dado que no existe en el JSON.</li>
-                    <li><strong>Compras Internas Gravadas:</strong> Extraído del campo <code>totalGravada</code> en el objeto <code>resumen</code> del JSON.</li>
+                    <li><strong>Tipo de Documento:</strong> Generado por la función <code>GetDTE_Anexo_Compras()</code> a partir del campo <code>tipoDte</code> en <code>identificacion</code>.</li>
+                    <li><strong>Número de Documento:</strong> Extraído y depurado del campo <code>codigoGeneracion</code> en <code>identificacion</code>.</li>
+                    <li><strong>NIT o NRC del Cliente:</strong> Extraído del campo <code>nit</code> en <code>receptor</code>, o del campo <code>nrc</code> en <code>emisor</code>, según disponibilidad.</li>
+                    <li><strong>Nombre/Razón Social o Denominación:</strong> Obtenido de <code>nombre</code> o <code>nombreComercial</code> en el objeto <code>emisor</code>, según disponibilidad.</li>
+                    <li><strong>Compras Internas Exentas:</strong> Calculado mediante <code>SumarFovialyContrans(objson)</code>.</li>
+                    <li><strong>Internaciones Exentas y/o No Sujetas:</strong> Valor fijo asignado como <code>"0.00"</code>.</li>
+                    <li><strong>Importaciones Exentas y/o No Sujetas:</strong> Valor fijo asignado como <code>"0.00"</code>.</li>
+                    <li><strong>Compras Internas Gravadas:</strong> Obtenido del campo <code>totalGravada</code> en <code>resumen</code>.</li>
                     <li><strong>Internaciones Gravadas de Bienes:</strong> Valor fijo asignado como <code>"0.00"</code>.</li>
                     <li><strong>Importaciones Gravadas de Bienes:</strong> Valor fijo asignado como <code>"0.00"</code>.</li>
                     <li><strong>Importaciones Gravadas de Servicios:</strong> Valor fijo asignado como <code>"0.00"</code>.</li>
-                    <li><strong>Crédito Fiscal:</strong> Buscado en el array <code>tributos</code> con el código <code>20 (IVA)</code> en el objeto <code>resumen</code> del JSON. Si no se encuentra, se devuelve <code>"0"</code>.</li>
-                    <li><strong>Total de Compras:</strong> Extraído del campo <code>montoTotalOperacion</code> en el objeto <code>resumen</code> del JSON.</li>
+                    <li><strong>Crédito Fiscal:</strong> Extraído del array <code>tributos</code> en <code>resumen</code>, buscando código <code>20</code>. Valor por defecto <code>"0"</code>.</li>
+                    <li><strong>Total de Compras:</strong> Extraído del campo <code>montoTotalOperacion</code> en <code>resumen</code>.</li>
+                    <li><strong>DUI del Proveedor:</strong> Valor vacío asignado como <code>""</code>.</li>
                 </ul>
             </div>
         </div>

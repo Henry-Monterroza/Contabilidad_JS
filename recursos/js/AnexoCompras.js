@@ -88,7 +88,7 @@ $(document).ready(function () {
                         "NUMERO_DE_DOCUMENTO":objson.identificacion.codigoGeneracion.trim(),
                         "NIT_O_NRC_DEL_CLIENTE":objson.receptor.nit || objson.emisor.nrc,
                         "NOMBRE_RAZON_SOCIAL_O_DENOMINACION": objson.emisor.nombre || objson.emisor.nombreComercial,
-                        "COMPRAS_INTERNAS_EXENTAS": objson.resumen.totalExenta,
+                        "COMPRAS_INTERNAS_EXENTAS": SumarFovialyContrans(objson),
                         "INTERNACIONES_EXENTAS_Y/O_NO_SUJETAS":"0.00",//"No tengo ejemplo JSON 11. FACTURA DE EXPORTACIÓN",
                         "IMPORTACIONES EXENTAS Y/O NO SUJETAS":"0.00",// "No tengo ejemplo JSON 11. FACTURA DE EXPORTACIÓN",
                         "COMPRAS_INTERNAS_GRAVADAS": objson.resumen.totalGravada,
@@ -101,6 +101,8 @@ $(document).ready(function () {
                     };
                     excelarray.push(obj);
                 }
+
+
 
 
             } catch (ex) {
@@ -148,6 +150,15 @@ $(document).ready(function () {
         return "No se encontró selloRecibido";
     }
 
+    function SumarFovialyContrans(objson) {
+        // Extraer los valores de "D1" y "C8" o asignar 0 si no existen
+        const valorD1 = parseFloat((objson.resumen?.tributos?.find(tributo => tributo.codigo === "D1") || {}).valor || "0");
+        const valorC8 = parseFloat((objson.resumen?.tributos?.find(tributo => tributo.codigo === "C8") || {}).valor || "0");
+    
+        // Retornar la suma de los valores
+        return valorD1 + valorC8;
+    }
+    
 
     function GetDesDTE(codigoDTE) {
         switch (codigoDTE) {
