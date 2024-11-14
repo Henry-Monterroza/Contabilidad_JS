@@ -81,24 +81,24 @@ $(document).ready(function () {
                 if (dteif == "03" ||    dteif == "05" ||  dteif == "06"){
 
                     let obj = {
-                        "F_Emision": objson.identificacion.fecEmi,
+                        "FECHA_EMISIÓN": GetDateFormat(objson.identificacion.fecEmi),
                         "CLASE_DOCUMENTO": "4. DOCUMENTO TRIBUTARIO ELECTRONICO (DTE)",
-                        "DTE": objson.identificacion.tipoDte,
                         "TIPO_DOCUMENTO": GetDTE_Anexo_Contribuyente(objson.identificacion.tipoDte),
                         "NUMERO_DE_RESOLUCION(CodControl)": objson.identificacion.numeroControl.trim(),
                         "SERIE_DEL_DOCUMENTO(SelloRecibido)": GetSelloRecibido(objson),
                         "NUMERO_DE_DOCUMENTO(CodGeneracion)":objson.identificacion.codigoGeneracion.trim(),
-                        "NMERO_DE_CONTROL_INTERNO": "No he identificado el Numero",
+                        "NMERO_DE_CONTROL_INTERNO": objson.identificacion.tipoDte,
                         "NIT_O_NRC_DEL_CLIENTE":objson.receptor.nit || objson.receptor.nrc,
                         "NOMBRE_RAZON_SOCIAL_O_DENOMINACION":objson.receptor.nombre || objson.receptor.nombreComercial,
                         "VENTAS_EXENTAS": objson.resumen.totalExenta,
                         "VENTAS_NO_SUJETAS": objson.resumen.totalNoSuj,
                         "VENTAS_GRAVADAS_LOCALES": objson.resumen.totalGravada,
                         "DEBITO_FISCAL(IVA)": (objson.resumen?.tributos?.find(tributo => tributo.codigo === "20") || {}).valor || "0",
-                        "VENTAS_TERCEROS_NO_DOMICILIADOS":"No se ",
-                        "DEBITO FISCAL POR VENTAS A CUENTA DE TERCEROS": "No se",
+                        "VENTAS_TERCEROS_NO_DOMICILIADOS":"0.00",
+                        "DEBITO FISCAL POR VENTAS A CUENTA DE TERCEROS": "0.00",
                         "TOTAL_DE_VENTAS":objson.resumen.montoTotalOperacion,
-                        "NUMERO_DE_DUI_DEL_CLIENTE": "Me perdi"
+                        "NUMERO_DE_DUI_DEL_CLIENTE": "",
+                        "NUMERO_DE_ANEXO": "",
                     };
                     excelarray.push(obj);
 
@@ -150,6 +150,14 @@ $(document).ready(function () {
         return "No se encontró selloRecibido";
     }
 
+    // Suponiendo que tienes la fecha en formato yyyy-mm-dd
+ function GetDateFormat(inputDate){
+    // Usamos split para separar año, mes y día
+    let parts = inputDate.split('-');
+    // Reorganizamos los valores en el formato dd/mm/yyyy
+    let formattedDate = `${parts[2]}/${parts[1]}/${parts[0]}`;
+    return formattedDate;
+     }
 
 function GetDesDTE(codigoDTE) {
     switch (codigoDTE) {
