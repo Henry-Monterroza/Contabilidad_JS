@@ -83,32 +83,24 @@ $(document).ready(function () {
                     let obj = {
                         "FECHA_EMISIÓN": GetDateFormat(objson.identificacion.fecEmi),
                         "CLASE_DOCUMENTO": "4. DOCUMENTO TRIBUTARIO ELECTRONICO (DTE)",
-                        "TIPO_DOCUMENTO": GetDTE_Anexo_Contribuyente(objson.identificacion.tipoDte),
+                        "TIPO_DOCUMENTO": GetDesDTE(objson.identificacion.tipoDte),
                         "NUMERO_DE_RESOLUCION(CodControl)": objson.identificacion.numeroControl.trim(),
-                        "SERIE_DEL_DOCUMENTO(SelloRecibido)": GetSelloRecibido(objson),
+                        "SERIE_DEL_DOCUMENTO(SelloReccepcion)": GetSelloRecepcion(objson),
                         "NUMERO_DE_CONTROL_INTERNO_DEL": objson.identificacion.tipoDte,
                         "NMERO_DE_CONTROL_INTERNO_AL": objson.identificacion.tipoDte,
                         "NUMERO_DE_DOCUMENTO DEL(CodGeneracion)":objson.identificacion.codigoGeneracion.trim(),
                         "NUMERO_DE_DOCUMENTO AL(CodGeneracion)":objson.identificacion.codigoGeneracion.trim(),
                         "NÚMERO DE MAQUINA REGISTRADORA":objson.receptor.nit || objson.receptor.nrc,
-                        "VENTAS_EXENTAS": objson.resumen.totalExenta,
+                        "VENTAS_EXENTAS": objson.resumen.totalExenta || "0.00" ,
                         "VENTAS INTERNAS EXENTAS NO SUJETAS A PROPORCIONALIDAD":"0.00",
-                        "VENTAS_NO_SUJETAS": objson.resumen.totalNoSuj,
-                        "VENTAS_GRAVADAS_LOCALES": objson.resumen.totalGravada,
+                        "VENTAS_NO_SUJETAS": objson.resumen.totalNoSuj  || "0.00" ,
+                        "VENTAS_GRAVADAS_LOCALES": objson.resumen.totalGravada  || "0.00" ,
                         "EXPORTACIONES DENTRO DEL ÁREA DE CENTROAMÉRICA":"0.00",
                         "EXPORTACIONES FUERA DEL ÁREA DE CENTROAMÉRICA":"0.00",
                         "EXPORTACIONES DE SERVICIO":"0.00",
                         "VENTAS A CUENTA DE TERCEROS NO DOMICILIADOS":"0.00",
                         "TOTAL DE VENTAS":objson.resumen.montoTotalOperacion,
                         "NUMERO_DE_ANEXO": "2"
-                        // "VENTAS A ZONAS FRANCAS  Y DPA (TASA CERO)":"0.00",
-                        // "DEBITO_FISCAL(IVA)": (objson.resumen?.tributos?.find(tributo => tributo.codigo === "20") || {}).valor || "0",
-                        // "VENTAS_TERCEROS_NO_DOMICILIADOS":"0.00",
-                        // "DEBITO FISCAL POR VENTAS A CUENTA DE TERCEROS": "0.00",
-                        // "TOTAL_DE_VENTAS":objson.resumen.montoTotalOperacion,
-                        // "NUMERO_DE_DUI_DEL_CLIENTE": "",
-                        // "NUMERO_DE_ANEXO": "",
-                        // "NOMBRE_RAZON_SOCIAL_O_DENOMINACION":objson.receptor.nombre || objson.receptor.nombreComercial,
                     };
                     excelarray.push(obj);
 
@@ -169,6 +161,25 @@ $(document).ready(function () {
         return "No se encontró selloRecibido";
     }
 
+
+    function GetSelloRecepcion(objson) {
+        // Verificar si el propio objeto tiene el atributo selloRecibido
+        if (objson.hasOwnProperty('SelloRecepcion')) {
+            return objson.SelloRecepcion;
+        }
+        
+        // Buscar el atributo selloRecibido dentro de subobjetos
+        for (const key in objson) {
+            if (objson[key] && typeof objson[key] === 'object') {
+                if (objson[key].hasOwnProperty('SelloRecepcion')) {
+                    return objson[key].SelloRecepcion;
+                }
+            }
+        }
+        
+        // Si no se encuentra, retornar mensaje de no encontrado
+        return "No se encontró SelloRecepcion";
+    }
 
 function GetDesDTE(codigoDTE) {
     switch (codigoDTE) {
