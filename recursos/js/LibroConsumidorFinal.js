@@ -80,6 +80,9 @@ $(document).ready(function () {
 
                 if (dteif == "01" ||    dteif == "02" ||  dteif == "10" ||  dteif == "11"){
 
+                    let ventaslocales = (dteif != 11) ? (objson.resumen.totalGravada || "0.00") : "0.00";
+                    let  ExportCentroAmerica = (dteif == 11) ? (objson.resumen.totalGravada || "0.00") : "0.00";
+
                     let obj = {
                         "FECHA_EMISIÓN": GetDateFormat(objson.identificacion.fecEmi),
                         "CLASE_DOCUMENTO": "4. DOCUMENTO TRIBUTARIO ELECTRONICO (DTE)",
@@ -94,8 +97,8 @@ $(document).ready(function () {
                         "VENTAS_EXENTAS": objson.resumen.totalExenta || "0.00" ,
                         "VENTAS INTERNAS EXENTAS NO SUJETAS A PROPORCIONALIDAD":"0.00",
                         "VENTAS_NO_SUJETAS": objson.resumen.totalNoSuj  || "0.00" ,
-                        "VENTAS_GRAVADAS_LOCALES": objson.resumen.totalGravada  || "0.00" ,
-                        "EXPORTACIONES DENTRO DEL ÁREA DE CENTROAMÉRICA":"0.00",
+                        "VENTAS_GRAVADAS_LOCALES": ventaslocales,
+                        "EXPORTACIONES DENTRO DEL ÁREA DE CENTROAMÉRICA": ExportCentroAmerica ,
                         "EXPORTACIONES FUERA DEL ÁREA DE CENTROAMÉRICA":"0.00",
                         "EXPORTACIONES DE SERVICIO":"0.00",
                         "VENTAS A CUENTA DE TERCEROS NO DOMICILIADOS":"0.00",
@@ -132,6 +135,7 @@ $(document).ready(function () {
         $(_ControlFileName).val(null);
 
     });
+
 
     function GetDateFormat(inputDate){
         // Usamos split para separar año, mes y día
