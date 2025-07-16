@@ -87,7 +87,7 @@ $(document).ready(function () {
                         "NUMERO_DE_RESOLUCION(CodGeneracion)":objson.identificacion.codigoGeneracion.trim(),
                         "SERIE_DEL_DOCUMENTO(SelloRecibido)": GetSelloRecibido(objson),
                         "NUMERO_DE_DOCUMENTO(CodControl)":objson.identificacion.numeroControl.trim(),
-                        "NUMERO_DE_CONTROL_INTERNO": objson.identificacion.numeroControl.trim(),
+                        "NUMERO_DE_CONTROL_INTERNO": "",
                         // "NUMERO_DE_CONTROL_INTERNO": objson.identificacion.tipoDte,
                         "NIT_O_NRC_DEL_CLIENTE":objson.receptor.nit || objson.receptor.nrc,
                         "NOMBRE_RAZON_SOCIAL_O_DENOMINACION":objson.receptor.nombre || objson.receptor.nombreComercial,
@@ -99,8 +99,11 @@ $(document).ready(function () {
                         "DEBITO FISCAL POR VENTAS A CUENTA DE TERCEROS": "0.00",
                         "TOTAL_DE_VENTAS":objson.resumen.montoTotalOperacion,
                         "NUMERO_DE_DUI_DEL_CLIENTE": "",
-                        "TIPO DE OPERACIÓN (Renta)": objson.identificacion.tipoOperacion,
-                        "TIPO DE INGRESO (Renta)": objson.cuerpoDocumento[0].tipoItem,
+                        // "TIPO DE OPERACIÓN (Renta)": objson.identificacion.tipoOperacion,
+                        // "TIPO DE INGRESO (Renta)": objson.cuerpoDocumento[0].tipoItem,
+
+                        "TIPO DE OPERACIÓN (Renta)": "",
+                        "TIPO DE INGRESO (Renta)": "",
                         "NUMERO_DE_ANEXO": "",
                     };
                     excelarray.push(obj);
