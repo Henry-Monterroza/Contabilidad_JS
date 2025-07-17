@@ -81,13 +81,15 @@ $(document).ready(function () {
                 if (dteif == "03" || dteif == "05" || dteif == "06"|| dteif == "11") {
 
                     let obj = {
+
                         "FECHA_EMISIÓN": GetDateFormat(objson.identificacion.fecEmi),
                         "CLASE_DOCUMENTO": "4. DOCUMENTO TRIBUTARIO ELECTRONICO (DTE)",
                         // "DTE": objson.identificacion.tipoDte,
                         "TIPO_DOCUMENTO": GetDTE_Anexo_Compras(objson.identificacion.tipoDte),
-                        "NUMERO_DE_DOCUMENTO(CodGeneracion)":objson.identificacion.codigoGeneracion.trim(),
-                        "NUMERO_DE_RESOLUCION(NoControl)": objson.identificacion.numeroControl.trim(),
-                        "SERIE_DEL_DOCUMENTO(SelloRecibido)": GetSelloRecibido(objson),
+                         "NUMERO_DE_DOCUMENTO(tipoDte)":objson.identificacion.tipoDte,
+                        // "NUMERO_DE_DOCUMENTO(CodGeneracion)":objson.identificacion.codigoGeneracion.trim(),
+                        // "NUMERO_DE_RESOLUCION(NoControl)": objson.identificacion.numeroControl.trim(),
+                        // "SERIE_DEL_DOCUMENTO(SelloRecibido)": GetSelloRecibido(objson),
                         "NIT_O_NRC_DEL_CLIENTE":objson.receptor.nit || objson.emisor.nrc,
                         "NOMBRE_RAZON_SOCIAL_O_DENOMINACION": objson.emisor.nombre || objson.emisor.nombreComercial,
                         "COMPRAS_INTERNAS_EXENTAS": SumarFovialyContrans(objson),
@@ -100,6 +102,28 @@ $(document).ready(function () {
                         "CRÉDITO_FISCAL":(objson.resumen?.tributos?.find(tributo => tributo.codigo === "20") || {}).valor || "0",
                         "TOTAL_DE_COMPRAS":objson.resumen.montoTotalOperacion,
                         "DUI_DEL_PROVEEDOR ":""
+
+                        // "FECHA_EMISIÓN": GetDateFormat(objson.identificacion.fecEmi),
+                        // "CLASE_DOCUMENTO": "4. DOCUMENTO TRIBUTARIO ELECTRONICO (DTE)",
+                        // // "DTE": objson.identificacion.tipoDte,
+                        // "TIPO_DOCUMENTO": GetDTE_Anexo_Compras(objson.identificacion.tipoDte),
+                        
+                        //  "NUMERO_DE_DOCUMENTO(tipoDte)":objson.identificacion.tipoDte,
+                        // // "NUMERO_DE_DOCUMENTO(CodGeneracion)":objson.identificacion.codigoGeneracion.trim(),
+                        // "NUMERO_DE_RESOLUCION(NoControl)": objson.identificacion.numeroControl.trim(),
+                        // "SERIE_DEL_DOCUMENTO(SelloRecibido)": GetSelloRecibido(objson),
+                        // "NIT_O_NRC_DEL_CLIENTE":objson.receptor.nit || objson.emisor.nrc,
+                        // "NOMBRE_RAZON_SOCIAL_O_DENOMINACION": objson.emisor.nombre || objson.emisor.nombreComercial,
+                        // "COMPRAS_INTERNAS_EXENTAS": SumarFovialyContrans(objson),
+                        // "INTERNACIONES_EXENTAS_Y/O_NO_SUJETAS":"0.00",//"No tengo ejemplo JSON 11. FACTURA DE EXPORTACIÓN",
+                        // "IMPORTACIONES EXENTAS Y/O NO SUJETAS":"0.00",// "No tengo ejemplo JSON 11. FACTURA DE EXPORTACIÓN",
+                        // "COMPRAS_INTERNAS_GRAVADAS": objson.resumen.totalGravada,
+                        // "INTERNACIONES_GRAVADAS_DE_BIENES": "0.00",
+                        // "IMPORTACIONES_GRAVADAS_DE_BIENES": "0.00",
+                        // "IMPORTACIONES_GRAVADAS_DE_SERVICIOS": "0.00",
+                        // "CRÉDITO_FISCAL":(objson.resumen?.tributos?.find(tributo => tributo.codigo === "20") || {}).valor || "0",
+                        // "TOTAL_DE_COMPRAS":objson.resumen.montoTotalOperacion,
+                        // "DUI_DEL_PROVEEDOR ":""
                     };
                     excelarray.push(obj);
                 }
