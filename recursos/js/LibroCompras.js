@@ -90,7 +90,7 @@ $(document).ready(function () {
                          "NUMERO_DE_DOCUMENTO(CodGeneracion)":objson.identificacion.codigoGeneracion.trim(),
                         // "NUMERO_DE_RESOLUCION(NoControl)": objson.identificacion.numeroControl.trim(),
                         // "SERIE_DEL_DOCUMENTO(SelloRecibido)": GetSelloRecibido(objson),
-                        "NIT_O_NRC_DEL_CLIENTE":objson.receptor.nit || objson.emisor.nrc,
+                        "NIT_O_NRC_DEL_CLIENTE":objson.emisor.nrc,
                         "NOMBRE_RAZON_SOCIAL_O_DENOMINACION": objson.emisor.nombre || objson.emisor.nombreComercial,
                         "COMPRAS_INTERNAS_EXENTAS": SumarFovialyContrans(objson),
                         "INTERNACIONES_EXENTAS_Y/O_NO_SUJETAS":"0.00",//"No tengo ejemplo JSON 11. FACTURA DE EXPORTACIÓN",
